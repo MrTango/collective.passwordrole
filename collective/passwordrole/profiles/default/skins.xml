@@ -5,7 +5,7 @@
 
  <object name="collective_passwordrole"
     meta_type="Filesystem Directory View"
-    directory="collective.passwordrole:skins/colelctive_passwordrole"/>
+    directory="collective.passwordrole:skins/collective_passwordrole"/>
 
  <skin-path name="*">
   <layer name="collective_passwordrole"
