@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<import-steps>
+  <import-step id="passwordrole_pas_import_various" version="0.1"
+               handler="collective.passwordrole.setuphandlers.importVarious"
+               title="PasswordRole PAS Plugin">
+  </import-step>
+</import-steps>

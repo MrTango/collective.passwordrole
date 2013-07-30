@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!-- This file holds the setup configuration for the portal_skins tool -->
+
+<object name="portal_skins">
+
+ <object name="collective_passwordrole"
+    meta_type="Filesystem Directory View"
+    directory="collective.passwordrole:skins/colelctive_passwordrole"/>
+
+ <skin-path name="*">
+  <layer name="collective_passwordrole"
+     insert-after="custom"/>
+ </skin-path>
+
+</object>

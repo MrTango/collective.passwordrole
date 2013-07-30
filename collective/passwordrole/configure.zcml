@@ -1,0 +1,76 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    i18n_domain="collective.passwordrole">
+
+  <include package="Products.CMFCore" file="configure.zcml" />
+
+  <five:registerPackage package="." initialize=".initialize" />
+
+  <genericsetup:registerProfile
+      name="default"
+      title="PasswordRole PAS plugin"
+      directory="profiles/default"
+      description="Add PlonePAS authentification PasswordRole plugin"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+  <!-- -*- extra stuff goes here -*- -->
+
+  <i18n:registerTranslations directory="locales" />
+
+    <!-- PasswordRole providing items -->
+    <class class="Products.ATContentTypes.content.base.ATCTContent">
+        <implements interface=".interfaces.IPasswordRoleProviding" />
+    </class>
+    <class class="Products.ATContentTypes.content.base.ATCTFolderMixin">
+        <implements interface=".interfaces.IPasswordRoleProviding" />
+    </class>
+
+    <adapter 
+        for=".interfaces.IPasswordRoleProviding"
+        provides=".interfaces.IPasswordRoleAnnotate"
+        factory=".passwordroleprovider.PasswordRoleAnnotateAdapter"/>
+
+    <adapter
+        for="Products.CMFCore.interfaces.IContentish"
+        factory=".passwordroleprovider.PasswordRoleLocalRolesProviderAdapter"
+        />
+
+    <browser:page
+      for="*"
+      name="passwordrole"
+      class=".views.PasswordroleView"
+      permission="zope2.View"
+      />
+
+    <browser:page
+      name="manage-passwordroles"
+      for="*"
+      class=".views.ManagePasswordrolesView"
+      template="manage-passwordroles.pt"
+      permission="cmf.ModifyPortalContent"
+      />
+
+    <browser:page
+      name="delete-passwordrole"
+      for="*"
+      class=".views.ManagePasswordrolesView"
+      attribute="delete_passwordrole" 
+      permission="cmf.ModifyPortalContent"
+      />
+
+    <browser:page
+      name="add-passwordrole"
+      for="*"
+      class=".views.PasswordroleAddCredentialForm"
+      permission="cmf.ModifyPortalContent"
+      />
+
+    <cmf:registerDirectory
+      name="collective_passwordrole"/>
+
+</configure>
