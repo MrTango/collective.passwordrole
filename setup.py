@@ -6,7 +6,7 @@ version = '0.1b1'
 setup(name='collective.passwordrole',
       version=version,
       description="Password based sharing of Plone content, like tokenrole but with username and password.",
-      long_description=open("README.txt").read() + "\n" +
+      long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
@@ -33,6 +33,4 @@ setup(name='collective.passwordrole',
       [z3c.autoinclude.plugin]
       target = plone
       """,
-      setup_requires=["PasteScript"],
-      paster_plugins=["ZopeSkel"],
       )
