@@ -78,6 +78,8 @@
 
                 <div id="login-form">
 
+                <fieldset>
+                <legend i18n:translate="">Plone login</legend>
                     <input type="hidden"
                         name="came_from"
                         value=""
@@ -201,6 +203,7 @@
                                />
 
                     </div>
+                  </fieldset>
 
                 </div>
 
@@ -231,7 +234,6 @@
                     </div>
 
                 </div>
-
             </form>
 
         <tal:use_iframe condition="use_iframe">
@@ -277,80 +279,81 @@
 
 
 
-            <form tal:attributes="action python:context.absolute_url()+'/@@passwordrole'"
-                  class="enableAutoFocus"
-                  method="post"
-                  id="passwordrole_form">
+        <form tal:attributes="action python:context.absolute_url()+'/@@passwordrole'"
+              class="enableAutoFocus"
+              method="post"
+              id="passwordrole_form">
+          
+            <div id="passwordrole-form">
+              <fieldset>
+              <legend i18n:translate="">Passwordrole login</legend>
+                <input type="hidden"
+                    name="came_from"
+                    value=""
+                tal:attributes="value came_from|nothing" />
 
-                <div id="passwordrole-form">
-
-                    <input type="hidden"
-                        name="came_from"
-                        value=""
-                    tal:attributes="value came_from|nothing" />
-
-                    <input type="hidden" name="form.submitted" value="1" />
-                    <input type="hidden" name="js_enabled" id="js_enabled" value="0" />
-                    <input type="hidden" name="cookies_enabled" id="cookies_enabled" value="" />
-                    <input type="hidden" name="login_name" id="login_name" value="" />
-                    <input type="hidden" name="pwd_empty" id="pwd_empty" value="0" />
-
-                    <div class="field"
-                         tal:define="error python:errors.get(ac_name, None);"
-                         tal:attributes="class python:test(error, 'field error', 'field')">
-
-                        <label i18n:translate="label_login_name"
-                               tal:condition="not:use_email_as_login"
-                               tal:attributes="for ac_name">Login Name</label>
-
-                        <label i18n:translate="label_email"
-                               tal:condition="use_email_as_login"
-                               tal:attributes="for ac_name">E-mail</label>
-
-                        <div tal:condition="error"
-                             tal:content="error">Validation error output</div>
-
-                        <input type="text"
-                               size="15"
-                               tal:attributes="name ac_name;
-                                               id ac_name;
-                                               value login_name;"
-                               />
-
-                </div>
+                <input type="hidden" name="form.submitted" value="1" />
+                <input type="hidden" name="js_enabled" id="js_enabled" value="0" />
+                <input type="hidden" name="cookies_enabled" id="cookies_enabled" value="" />
+                <input type="hidden" name="login_name" id="login_name" value="" />
+                <input type="hidden" name="pwd_empty" id="pwd_empty" value="0" />
 
                 <div class="field"
-                         tal:define="error python:errors.get(ac_password, None);"
-                         tal:attributes="class python:test(error, 'field error', 'field')">
+                     tal:define="error python:errors.get(ac_name, None);"
+                     tal:attributes="class python:test(error, 'field error', 'field')">
 
-                        <label i18n:translate="label_password"
-                               tal:attributes="for ac_password">Password</label>
+                    <label i18n:translate="label_login_name"
+                           tal:condition="not:use_email_as_login"
+                           tal:attributes="for ac_name">Login Name</label>
 
-                        <div tal:condition="error"
-                             tal:content="error">Validation error output</div>
+                    <label i18n:translate="label_email"
+                           tal:condition="use_email_as_login"
+                           tal:attributes="for ac_name">E-mail</label>
 
-                        <input type="password"
-                               size="15"
-                               tal:attributes="name ac_password;
-                                               id ac_password;"
-                               />
+                    <div tal:condition="error"
+                         tal:content="error">Validation error output</div>
+
+                    <input type="text"
+                           size="15"
+                           tal:attributes="name ac_name;
+                                           id ac_name;
+                                           value login_name;"
+                           />
+
+            </div>
+
+            <div class="field"
+                     tal:define="error python:errors.get(ac_password, None);"
+                     tal:attributes="class python:test(error, 'field error', 'field')">
+
+                    <label i18n:translate="label_password"
+                           tal:attributes="for ac_password">Password</label>
+
+                    <div tal:condition="error"
+                         tal:content="error">Validation error output</div>
+
+                    <input type="password"
+                           size="15"
+                           tal:attributes="name ac_password;
+                                           id ac_password;"
+                           />
+            </div>
+
+
+                <div class="formControls">
+
+                    <input class="context"
+                           type="submit"
+                           name="submit"
+                           value="Log in"
+                           i18n:attributes="value label_log_in;"
+                           />
+
                 </div>
+              </fieldset>
 
-
-                    <div class="formControls">
-
-                        <input class="context"
-                               type="submit"
-                               name="submit"
-                               value="Log in"
-                               i18n:attributes="value label_log_in;"
-                               />
-
-                    </div>
-
-                </div>
-
-            </form>
+            </div>
+        </form>
 
 
 
